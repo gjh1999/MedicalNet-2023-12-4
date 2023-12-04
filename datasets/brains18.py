@@ -146,7 +146,14 @@ class BrainS18Dataset(Dataset):
         out_random = np.random.normal(0, 1, size = volume.shape)
         out[volume == 0] = out_random[volume == 0]
         return out
+'''
+__itensity_normalize_one_volume__ 方法用于归一化三维体积的灰度强度。具体步骤如下：
 
+提取体积中非零元素的像素值。
+计算非零元素的均值和标准差。
+对整个体积进行灰度强度归一化，使得非零元素的均值为0，标准差为1。
+对零元素的位置填充随机生成的服从正态分布的数值。
+'''
     def __resize_data__(self, data):
         """
         Resize the data to the input size
@@ -156,7 +163,13 @@ class BrainS18Dataset(Dataset):
         data = ndimage.interpolation.zoom(data, scale, order=0)
 
         return data
+'''
+__resize_data__ 方法用于将数据调整到指定的输入大小。具体步骤如下：
 
+获取原始数据的深度、高度和宽度。
+计算每个维度的缩放比例，以使数据调整到指定的输入大小。
+使用插值方法（这里使用零阶插值，即最近邻插值）对数据进行缩放。
+'''
 
     def __crop_data__(self, data, label):
         """
